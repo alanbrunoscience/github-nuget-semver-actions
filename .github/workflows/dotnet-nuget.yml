@@ -15,23 +15,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.head_ref }}
-        fetch-depth: 1
-    
-    - name: Git Version
-      uses: codacy/git-version@2.2.0
     
     - name: Setup.NET 5
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.101
 
-    - name: Geração do package
-      run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -o out
+    - name: Generate build number
+      uses: einaregilsson/build-number@v2 
+      with:
+        token: ${{secrets.github_token}}        
+    - name: Print new build number
+      run: echo "Build number is $BUILD_NUMBER"
 
-    - name: Push no NuGet
-      run: |
-        cd out
-        dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
+    # - name: Geração do package
+    #   run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -o out
+
+    # - name: Push no NuGet
+    #   run: |
+    #     cd out
+    #     dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
+
+    
         

@@ -26,16 +26,16 @@ jobs:
       with:
         token: ${{secrets.github_token}}        
 
-    - name: Print new build number
-      run: echo "Build number is $BUILD_NUMBER"
+    # - name: Print new build number
+    #   run: echo "Build number is $BUILD_NUMBER"
 
-    # - name: Geração do package
-    #   run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -o out
+    - name: Geração do package
+      run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -o out
 
-    # - name: Push no NuGet
-    #   run: |
-    #     cd out
-    #     dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
+    - name: Push no NuGet
+      run: |
+        cd out
+        dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
 
     
         

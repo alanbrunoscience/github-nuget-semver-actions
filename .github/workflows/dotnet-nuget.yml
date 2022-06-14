@@ -5,7 +5,7 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-  
+
 jobs:
   pack-push:
     env:
@@ -15,6 +15,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}   # checkout the correct branch name
+        fetch-depth: 0                # fetch the whole repo history
+
+    - name: Git Version
+      uses: codacy/git-version@2.2.0
     
     - name: Setup.NET 5
       uses: actions/setup-dotnet@v1

@@ -41,8 +41,8 @@ jobs:
       with:
         token: ${{secrets.github_token}}        
 
-    - name: Print new build number
-      run: echo "Build number is $BUILD_NUMBER"
+    # - name: Print new build number
+    #   run: echo "Build number is $BUILD_NUMBER"
 
     - name: Geração do package
       run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -p:PackageVersion=1.0.$BUILD_NUMBER -o out

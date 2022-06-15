@@ -25,4 +25,4 @@ branches:
     tracks-release-branches: true
     is-release-branch: false
     is-mainline: false
-    pre-release-weight: 0
+    # pre-release-weight: 0

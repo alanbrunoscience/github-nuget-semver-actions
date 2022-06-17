@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>Melo.Distancias</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <!-- <PackageVersion>1.0.0</PackageVersion> -->
+    <PackageReference Include="ExamplePackage" Version="v*" />
     <Authors>Alan Bruno</Authors>
     <Company>Melo</Company>
     <PackageTags>NuGet;.NET 5;Classlib;GitHub;Actions</PackageTags>

@@ -2,7 +2,7 @@ name: release
 on:
   push:
     tags:
-      - 'v*'
+      - '${{ github.ref == refs/tags/* }}'
 
 jobs:
   Publish-release:
@@ -28,7 +28,7 @@ jobs:
           cat >> $GITHUB_ENV << EOF
           VERSION=${GITHUB_REF##*/}
           EOF
-          echo '$VERSION'
+          echo '${{ env.VERSION }}'
 
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v2

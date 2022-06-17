@@ -2,7 +2,7 @@ name: release
 on:
   push:
     tags:
-      - '${{ github.ref == refs/tags/* }}'
+      - '*'
 
 jobs:
   Publish-release:

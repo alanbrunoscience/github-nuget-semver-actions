@@ -28,7 +28,7 @@ jobs:
           cat >> $GITHUB_ENV << EOF
           VERSION=${GITHUB_REF##*/}
           EOF
-          echo '${{ env.VERSION }}'
+          echo ${{ env.VERSION }}
 
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v2

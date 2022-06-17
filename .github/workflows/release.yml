@@ -34,7 +34,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
 
-      - name: Split string (Python)
+      - name: Edit the correct version format (Python)
         run: |
           import os
           import re

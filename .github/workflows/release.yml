@@ -1,17 +1,17 @@
-name: release
+name: Generate Release
+
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
 
 jobs:
   Publish-release:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # dotnet-version: ['5.0.x', '6.0.x']
-        dotnet-version: ['6.0.x']
-    
+        dotnet-version: ["5.0.x", "6.0.x"]
+
     env:
       PROJECT_PATH: ./Melo.Distancias/*.csproj
       PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output
@@ -39,3 +39,12 @@ jobs:
 
       - name: Push Package on NuGet
         run: dotnet nuget push '${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg' --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
+
+      - name: Create Release
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          title: ${{ steps.versioning.outputs.version }}
+          automatic_release_tag: "latest"
+          prerelease: false

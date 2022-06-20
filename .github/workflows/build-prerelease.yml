@@ -1,17 +1,15 @@
-name: .NET + NuGet
+name: Generate Prerelease
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [opened, reopened]
 
 jobs:
-  pack-push:
+  Publish-prerelease:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # dotnet-version: ['5.0.x', '6.0.x']
-        dotnet-version: ['6.0.x']
+        dotnet-version: ['5.0.x', '6.0.x']
 
     env:
       PROJECT_PATH: ./Melo.Distancias/*.csproj
@@ -28,7 +26,7 @@ jobs:
       id: versioning
       uses: paulhatch/semantic-version@v4.0.2
       with:
-        branch: master
+        # branch: master
         tag_prefix: ''
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
@@ -46,12 +44,10 @@ jobs:
     - name: Push Package on NuGet
       run: dotnet nuget push '${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg' --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
 
-    - name: Create Release
-      if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        title: ${{ steps.versioning.outputs.version }}
-        automatic_release_tag: "latest"
-        # release_name: ${{ steps.versioning.outputs.version }}
-        prerelease: true
+    # - name: Create Release
+    #   if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    #   uses: "marvinpinto/action-automatic-releases@latest"
+    #   with:
+    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+    #     title: ${{ steps.versioning.outputs.version }}
+    #     prerelease: true

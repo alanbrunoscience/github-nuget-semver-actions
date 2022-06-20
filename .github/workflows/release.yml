@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ['5.0.x', '6.0.x']
-    
+        dotnet-version: ["5.0.x", "6.0.x"]
+
     env:
       PROJECT_PATH: ./Melo.Distancias/*.csproj
       PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output

@@ -53,9 +53,11 @@ jobs:
 
 
     - name: Build Project and Generate Package
+      if: ${{ env.PRERELEASE != '' }}
       run: dotnet build ${{ env.PROJECT_PATH }} -c Release -p:PackageVersion=${{ steps.versioning.outputs.version }} -o ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
     - name: Push Package on NuGet
+      if: ${{ env.PRERELEASE != '' }}
       run: dotnet nuget push '${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg' --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
 
     - name: Create Release

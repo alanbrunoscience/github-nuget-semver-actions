@@ -32,7 +32,7 @@ jobs:
         x = re.findall("alpha|beta|prerelease", name_branch)
         env_file = os.getenv('GITHUB_ENV')
         with open(env_file, "a") as myfile:
-          myfile.write("PRERELEASE=" + X[0])
+          myfile.write("PRERELEASE=" + x[0])
       shell: python
 
     - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}

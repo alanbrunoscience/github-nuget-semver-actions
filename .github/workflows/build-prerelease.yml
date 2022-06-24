@@ -49,7 +49,7 @@ jobs:
         major_pattern: "break:"
         minor_pattern: "feat:"
         patch_pattern: "fix:"
-        format: "${major}.${minor}.${patch}-$PRERELEASE${increment}"
+        format: "${major}.${minor}.${patch}-${{ env.PRERELEASE }}${increment}"
 
 
     - name: Build Project and Generate Package

@@ -65,11 +65,11 @@ jobs:
       if: ${{ env.PRERELEASE != '' }}
       run: dotnet nuget push '${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg' --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ secrets.NUGET_SERVER }} --skip-duplicate
 
-    - name: Create Release
-      if: ${{ env.PRERELEASE != '' }}
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        title: ${{ steps.versioning.outputs.version }}
-        automatic_release_tag: ${{ steps.versioning.outputs.version }}
-        prerelease: true
+    # - name: Create Release
+    #   if: ${{ env.PRERELEASE != '' }}
+    #   uses: "marvinpinto/action-automatic-releases@latest"
+    #   with:
+    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+    #     title: ${{ steps.versioning.outputs.version }}
+    #     automatic_release_tag: ${{ steps.versioning.outputs.version }}
+    #     prerelease: true

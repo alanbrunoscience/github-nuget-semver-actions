@@ -7,9 +7,9 @@ on:
 jobs:
   Publish-prerelease:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: ['5.0.x', '6.0.x']
+    # strategy:
+    #   matrix:
+    #     dotnet-version: ['5.0.x', '6.0.x']
 
     env:
       PROJECT_PATH: ./Melo.Distancias/*.csproj
@@ -35,10 +35,15 @@ jobs:
           myfile.write("PRERELEASE=" + x[0])
       shell: python
 
-    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+    # - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+    #   uses: actions/setup-dotnet@v2
+    #   with:
+    #     dotnet-version: ${{ matrix.dotnet-version }}
+
+    - name: Setup .NET Core SDK 5
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: '5.0.x'
     
     - name: Semantic versioning
       if: ${{ env.PRERELEASE != '' }}

@@ -5,7 +5,7 @@ on:
     types: [opened, reopened]
     branches:    
       - '**/alpha/**'
-      - '**/beta/**'
+      - '**/beta'
       - '**/prerelease/**'
 
 jobs:

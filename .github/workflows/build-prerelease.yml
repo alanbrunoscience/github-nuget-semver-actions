@@ -3,14 +3,10 @@ name: Generate Prerelease
 on:
   pull_request:
     types: [opened, reopened]
-    branches:    
-      # - '**/alpha/**'
-      - 'feat/**'
-      # - '**/prerelease/**'
-      #
 
 jobs:
   Publish-prerelease:
+    if: contains(github.head_ref, 'alpha') || contains(github.head_ref, 'beta') || contains(github.head_ref, 'prerelease')
     runs-on: ubuntu-latest
     # strategy:
     #   matrix:
